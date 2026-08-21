@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyect MG - Construye experiencias web increíbles con Django">
+    <title>{{ titulo }} | Landing</title>
+    <link rel="stylesheet" href="{% static 'landing/styles.css' %}">
+</head>
+<body>
+    <header class="navbar">
+        <nav class="container nav-content">
+            <a href="#" class="logo">Proyect<span>MG</span></a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#features">Características</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <a href="#contacto" class="btn btn-outline">Comenzar</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container hero-content">
+                <span class="badge">✨ Nueva versión disponible</span>
+                <h1>Construye experiencias web <em>increíbles</em></h1>
+                <p class="subtitle">
+                    El framework definitivo para llevar tus ideas al siguiente nivel.
+                    Rápido, seguro y diseñado para crecer contigo.
+                </p>
+                <div class="hero-actions">
+                    <a href="#contacto" class="btn btn-primary">Empezar ahora</a>
+                    <a href="#features" class="btn btn-secondary">Saber más →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">¿Por qué elegirnos?</h2>
+                <p class="section-subtitle">Todo lo que necesitas en un solo lugar</p>
+                <div class="grid">
+                    {% for feature in features %}
+                    <article class="card">
+                        <div class="card-icon">{{ feature.icon }}</div>
+                        <h3>{{ feature.title }}</h3>
+                        <p>{{ feature.text }}</p>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="cta">
+            <div class="container cta-box">
+                <h2>¿Listo para comenzar?</h2>
+                <p>Únete a miles de desarrolladores que ya construyen con nosotros.</p>
+                <form class="cta-form" action="#" method="post">
+                    {% csrf_token %}
+                    <input type="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                    <button type="submit" class="btn btn-primary">Registrarme</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>© 2026 Proyect MG — Construido con Django {{ django_version|default:"6.1" }}</p>
+            <ul class="footer-links">
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">Términos</a></li>
+                <li><a href="#">Privacidad</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
