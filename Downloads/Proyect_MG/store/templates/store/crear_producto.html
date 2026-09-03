@@ -1,0 +1,86 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Registrar Nuevo Producto - Tienda de Barrio{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>📝 Registrar Nuevo Producto</h1>
+        <p>Completa la información para agregar un producto al inventario</p>
+    </div>
+</div>
+
+<div class="card" style="max-width: 680px;">
+    <div class="card-header">
+        <h2>Información del Producto</h2>
+    </div>
+    <div class="card-body">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.nombre.id_for_label }}">Nombre del producto <span class="required">*</span></label>
+                {{ form.nombre }}
+                {% if form.nombre.errors %}
+                    <div class="form-error">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        {% for error in form.nombre.errors %}{{ error }}{% endfor %}
+                    </div>
+                {% endif %}
+                <span class="form-hint">Máximo 100 caracteres</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.precio.id_for_label }}">Precio <span class="required">*</span></label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--gray-400); font-weight: 500;">S/</span>
+                    {{ form.precio }}
+                </div>
+                {% if form.precio.errors %}
+                    <div class="form-error">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        {% for error in form.precio.errors %}{{ error }}{% endfor %}
+                    </div>
+                {% endif %}
+                <span class="form-hint">Valor mínimo: 0.00</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.categoria.id_for_label }}">Categoría <span class="required">*</span></label>
+                {{ form.categoria }}
+                {% if form.categoria.errors %}
+                    <div class="form-error">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        {% for error in form.categoria.errors %}{{ error }}{% endfor %}
+                    </div>
+                {% endif %}
+                <span class="form-hint">Ej: Abarrotes, Lácteos, Panadería, Bebidas, Conservas, Golosinas</span>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Guardar Producto
+                </button>
+                <a href="{% url 'store:lista_productos' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
